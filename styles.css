@@ -21,10 +21,13 @@
 html {
   min-width: 320px;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
   overflow-x: hidden;
   background: var(--bg);
@@ -230,6 +233,7 @@ body[data-project="chromatic"] .brand__mark i {
 .app-shell {
   width: min(1180px, calc(100% - 40px));
   min-height: calc(100vh - 150px);
+  min-height: calc(100svh - 150px);
   margin: 0 auto;
   display: grid;
   place-items: center;
@@ -1065,6 +1069,38 @@ footer p {
   margin: 0;
 }
 
+/* Tablets: preserva o respiro sem deixar os cartões estreitos demais. */
+@media (min-width: 761px) and (max-width: 1024px) {
+  .site-header,
+  .app-shell,
+  footer {
+    width: min(100% - 48px, 920px);
+  }
+
+  .screen--choice {
+    gap: 34px;
+    padding: 34px 0 58px;
+  }
+
+  h1 {
+    font-size: clamp(4rem, 9vw, 5.6rem);
+  }
+
+  .project-card {
+    min-height: 330px;
+    padding: 28px;
+  }
+
+  .project-card__art {
+    width: 175px;
+    height: 175px;
+  }
+
+  .screen--form {
+    width: min(100%, 820px);
+  }
+}
+
 @media (max-width: 760px) {
   .site-header,
   .app-shell,
@@ -1074,6 +1110,7 @@ footer p {
 
   .site-header {
     min-height: 68px;
+    gap: 16px;
   }
 
   .brand {
@@ -1090,7 +1127,13 @@ footer p {
   }
 
   h1 {
-    font-size: clamp(3rem, 15vw, 4.6rem);
+    font-size: clamp(2.75rem, 14vw, 4.6rem);
+    line-height: 0.96;
+    overflow-wrap: anywhere;
+  }
+
+  h2 {
+    font-size: clamp(2.05rem, 10vw, 3.2rem);
   }
 
   .project-grid {
@@ -1098,8 +1141,8 @@ footer p {
   }
 
   .project-card {
-    min-height: 320px;
-    padding: 28px;
+    min-height: 300px;
+    padding: 26px;
     border-radius: 24px;
   }
 
@@ -1118,6 +1161,20 @@ footer p {
     padding: 20px 18px 26px;
     border-radius: 23px;
     backdrop-filter: blur(14px);
+  }
+
+  .form-topbar {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .selected-project {
+    min-width: 0;
+  }
+
+  .selected-project span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .progress {
@@ -1169,6 +1226,12 @@ footer p {
     flex-direction: column;
     text-align: center;
   }
+
+  .toast {
+    right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    max-width: calc(100% - 28px);
+  }
 }
 
 @media (max-width: 420px) {
@@ -1182,18 +1245,134 @@ footer p {
     grid-template-columns: 1fr;
   }
 
+  .site-header,
+  .app-shell,
+  footer {
+    width: calc(100% - 20px);
+  }
+
+  .brand {
+    gap: 8px;
+    font-size: 0.79rem;
+  }
+
+  .brand__mark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .screen--choice {
+    gap: 24px;
+    padding-top: 20px;
+  }
+
+  .choice-copy > p:last-child,
+  .step-heading > p:last-child,
+  .screen--success > p {
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  .project-card {
+    min-height: 282px;
+    padding: 22px;
+  }
+
+  .project-card__number {
+    top: 22px;
+    left: 22px;
+  }
+
+  .project-card__art {
+    top: 18px;
+    right: 18px;
+    width: 150px;
+    height: 150px;
+    opacity: 0.66;
+  }
+
+  .screen--form {
+    margin-top: 10px;
+    padding: 18px 14px 22px;
+    border-radius: 20px;
+  }
+
+  .form-topbar {
+    gap: 9px;
+  }
+
+  .icon-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .progress {
+    margin-bottom: 30px;
+  }
+
+  .step-heading {
+    margin-bottom: 28px;
+  }
+
+  .rating-row {
+    gap: 5px;
+  }
+
+  .rating-row > label > span {
+    min-height: 56px;
+    padding: 6px 2px;
+  }
+
+  .nps-scale {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 7px;
+  }
+
+  .nps-scale span {
+    min-height: 44px;
+  }
+
   .option-cards--three,
   .option-cards {
     grid-template-columns: 1fr;
   }
 
   .form-actions {
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .form-actions .button {
-    flex: 1;
+    width: 100%;
     padding: 0 16px;
+  }
+
+  .button--primary {
+    margin-left: 0;
+  }
+
+  .screen--success {
+    padding: 58px 14px;
+  }
+
+  footer {
+    padding-bottom: max(30px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Evita que efeitos de hover fiquem presos depois do toque. */
+@media (hover: none) {
+  .project-card:hover,
+  .button:hover,
+  .choice-pills span:hover,
+  .rating-row > label > span:hover,
+  .nps-scale span:hover,
+  .option-cards > label > span:hover {
+    transform: none;
+  }
+
+  .project-card:hover::before {
+    opacity: 0;
   }
 }
 
