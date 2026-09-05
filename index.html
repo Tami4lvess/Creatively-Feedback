@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111a34">
+    <meta
+      name="description"
+      content="Avalie o Monthly Colors ou o Chromatic Void e ajude a melhorar os projetos."
+    >
+    <title>Creatively Feedback</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Orbitron:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script src="config.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-project="none">
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient__orb ambient__orb--one"></span>
+      <span class="ambient__orb ambient__orb--two"></span>
+      <div class="ambient__dots" id="ambient-dots"></div>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#" data-reset-form aria-label="Voltar à escolha do projeto">
+        <span class="brand__mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Creatively <strong>Feedback</strong></span>
+      </a>
+      <span class="project-year">TCC · 2026</span>
+    </header>
+
+    <main class="app-shell">
+      <section class="screen screen--choice is-active" id="choice-screen" aria-labelledby="choice-title">
+        <div class="choice-copy">
+          <p class="eyebrow">Sua experiência importa</p>
+          <h1 id="choice-title">Qual projeto você quer avaliar?</h1>
+          <p>
+            Escolha uma experiência. As perguntas e o visual serão adaptados ao projeto selecionado.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <button class="project-card project-card--monthly" type="button" data-choose-project="monthly">
+            <span class="project-card__art project-card__art--monthly" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <span class="project-card__number">01</span>
+            <span class="project-card__type">Experiência informativa</span>
+            <strong>Monthly Colors</strong>
+            <span class="project-card__description">Meses, cores, campanhas, datas e ciclos da Lua.</span>
+            <span class="project-card__action">Avaliar projeto <b aria-hidden="true">→</b></span>
+          </button>
+
+          <button class="project-card project-card--void" type="button" data-choose-project="chromatic">
+            <span class="project-card__art project-card__art--void" aria-hidden="true">
+              <i class="orbit orbit--one"></i>
+              <i class="orbit orbit--two"></i>
+              <i class="void-core"></i>
+            </span>
+            <span class="project-card__number">02</span>
+            <span class="project-card__type">Jogo espacial</span>
+            <strong>Chromatic Void</strong>
+            <span class="project-card__description">Ação, cores, habilidades e sobrevivência no vazio.</span>
+            <span class="project-card__action">Avaliar jogo <b aria-hidden="true">→</b></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen screen--form" id="form-screen" aria-labelledby="form-title" hidden>
+        <div class="form-topbar">
+          <button class="icon-button" type="button" data-reset-form aria-label="Trocar projeto">
+            <span aria-hidden="true">←</span>
+          </button>
+          <div class="selected-project">
+            <span class="selected-project__dot"></span>
+            <span id="selected-project-name">Monthly Colors</span>
+          </div>
+          <p class="step-counter"><span id="current-step-label">01</span> / 05</p>
+        </div>
+
+        <div class="progress" aria-label="Progresso do formulário">
+          <span id="progress-bar"></span>
+        </div>
+
+        <form id="feedback-form" novalidate>
+          <input type="hidden" name="project" id="project-input">
+          <input class="honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <section class="form-step is-active" data-step="1">
+            <div class="step-heading">
+              <p class="eyebrow">Antes de começar</p>
+              <h2 id="form-title">Queremos conhecer você</h2>
+              <p>Esses dados ajudam a entender quem está participando da avaliação.</p>
+            </div>
+
+            <div class="fields-grid">
+              <label class="field field--wide">
+                <span>Nome completo</span>
+                <input type="text" name="name" autocomplete="name" placeholder="Como podemos chamar você?" required minlength="2" maxlength="80">
+                <small class="field-error"></small>
+              </label>
+
+              <label class="field field--wide">
+                <span>E-mail</span>
+                <input type="email" name="email" autocomplete="email" placeholder="voce@exemplo.com" required maxlength="120">
+                <small class="field-error"></small>
+              </label>
+
+              <label class="field">
+                <span>Cidade</span>
+                <input type="text" name="city" autocomplete="address-level2" placeholder="Sua cidade" required minlength="2" maxlength="70">
+                <small class="field-error"></small>
+              </label>
+
+              <label class="field">
+                <span>Estado</span>
+                <select name="state" autocomplete="address-level1" required>
+                  <option value="">Selecione</option>
+                  <option>AC</option><option>AL</option><option>AP</option><option>AM</option>
+                  <option>BA</option><option>CE</option><option>DF</option><option>ES</option>
+                  <option>GO</option><option>MA</option><option>MT</option><option>MS</option>
+                  <option>MG</option><option>PA</option><option>PB</option><option>PR</option>
+                  <option>PE</option><option>PI</option><option>RJ</option><option>RN</option>
+                  <option>RS</option><option>RO</option><option>RR</option><option>SC</option>
+                  <option>SP</option><option>SE</option><option>TO</option>
+                </select>
+                <small class="field-error"></small>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-step" data-step="2" hidden>
+            <div class="step-heading">
+              <p class="eyebrow">Primeiras impressões</p>
+              <h2>Como foi sua experiência?</h2>
+              <p>Não existe resposta certa. Marque o que mais combina com a sua experiência.</p>
+            </div>
+
+            <fieldset class="question">
+              <legend>Por onde você conheceu o projeto?</legend>
+              <div class="choice-pills choice-pills--wrap">
+                <label><input type="radio" name="discovery" value="Instagram" required><span>Instagram</span></label>
+                <label><input type="radio" name="discovery" value="Escola ou evento"><span>Escola ou evento</span></label>
+                <label><input type="radio" name="discovery" value="Indicação"><span>Indicação</span></label>
+                <label><input type="radio" name="discovery" value="Outro"><span>Outro</span></label>
+              </div>
+              <small class="group-error"></small>
+            </fieldset>
+
+            <fieldset class="question">
+              <legend>Em qual dispositivo você acessou?</legend>
+              <div class="choice-pills">
+                <label><input type="radio" name="device" value="Celular" required><span>Celular</span></label>
+                <label><input type="radio" name="device" value="Computador"><span>Computador</span></label>
+                <label><input type="radio" name="device" value="Tablet"><span>Tablet</span></label>
+              </div>
+              <small class="group-error"></small>
+            </fieldset>
+
+            <fieldset class="question rating-question" data-rating-group>
+              <legend>Qual nota você dá para a experiência geral?</legend>
+              <div class="rating-row" role="radiogroup" aria-label="Nota da experiência geral">
+                <label><input type="radio" name="overall_rating" value="1" required><span>1<small>Ruim</small></span></label>
+                <label><input type="radio" name="overall_rating" value="2"><span>2<small>Fraca</small></span></label>
+                <label><input type="radio" name="overall_rating" value="3"><span>3<small>Regular</small></span></label>
+                <label><input type="radio" name="overall_rating" value="4"><span>4<small>Boa</small></span></label>
+                <label><input type="radio" name="overall_rating" value="5"><span>5<small>Ótima</small></span></label>
+              </div>
+              <small class="group-error"></small>
+            </fieldset>
+
+            <fieldset class="question">
+              <legend>De 0 a 10, quanto você recomendaria este projeto?</legend>
+              <div class="nps-scale" role="radiogroup" aria-label="Chance de recomendar de zero a dez">
+                <label><input type="radio" name="recommendation" value="0" required><span>0</span></label>
+                <label><input type="radio" name="recommendation" value="1"><span>1</span></label>
+                <label><input type="radio" name="recommendation" value="2"><span>2</span></label>
+                <label><input type="radio" name="recommendation" value="3"><span>3</span></label>
+                <label><input type="radio" name="recommendation" value="4"><span>4</span></label>
+                <label><input type="radio" name="recommendation" value="5"><span>5</span></label>
+                <label><input type="radio" name="recommendation" value="6"><span>6</span></label>
+                <label><input type="radio" name="recommendation" value="7"><span>7</span></label>
+                <label><input type="radio" name="recommendation" value="8"><span>8</span></label>
+                <label><input type="radio" name="recommendation" value="9"><span>9</span></label>
+                <label><input type="radio" name="recommendation" value="10"><span>10</span></label>
+              </div>
+              <div class="scale-caption"><span>Nada provável</span><span>Muito provável</span></div>
+              <small class="group-error"></small>
+            </fieldset>
+          </section>
+
+          <section class="form-step" data-step="3" hidden>
+            <div class="step-heading">
+              <p class="eyebrow">Sobre o projeto</p>
+              <h2>Vamos aos detalhes</h2>
+              <p>Estas perguntas mudam de acordo com o projeto escolhido.</p>
+            </div>
+
+            <div data-project-panel="monthly">
+              <fieldset class="question rating-question">
+                <legend>As informações dos meses são fáceis de encontrar e entender?</legend>
+                <div class="rating-row" role="radiogroup" aria-label="Clareza e organização do Monthly Colors">
+                  <label><input type="radio" name="monthly_clarity" value="1" data-project-required><span>1<small>Nada</small></span></label>
+                  <label><input type="radio" name="monthly_clarity" value="2"><span>2<small>Pouco</small></span></label>
+                  <label><input type="radio" name="monthly_clarity" value="3"><span>3<small>Razoável</small></span></label>
+                  <label><input type="radio" name="monthly_clarity" value="4"><span>4<small>Bem</small></span></label>
+                  <label><input type="radio" name="monthly_clarity" value="5"><span>5<small>Muito</small></span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+
+              <fieldset class="question">
+                <legend>Qual conteúdo foi mais interessante?</legend>
+                <div class="option-cards option-cards--three">
+                  <label><input type="radio" name="monthly_favorite_section" value="Cores e campanhas" data-project-required><span><b>◐</b>Cores e campanhas</span></label>
+                  <label><input type="radio" name="monthly_favorite_section" value="Datas importantes"><span><b>12</b>Datas importantes</span></label>
+                  <label><input type="radio" name="monthly_favorite_section" value="Fases da Lua"><span><b>◒</b>Fases da Lua</span></label>
+                  <label><input type="radio" name="monthly_favorite_section" value="Curiosidades"><span><b>✦</b>Curiosidades</span></label>
+                  <label><input type="radio" name="monthly_favorite_section" value="Visual dos meses"><span><b>▦</b>Visual dos meses</span></label>
+                  <label><input type="radio" name="monthly_favorite_section" value="Árvore 3D"><span><b>◆</b>Árvore 3D</span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+
+              <div class="fields-grid">
+                <label class="field">
+                  <span>Qual mês você mais gostou?</span>
+                  <select name="monthly_favorite_month" data-project-required>
+                    <option value="">Selecione</option>
+                    <option>Janeiro</option><option>Fevereiro</option><option>Março</option>
+                    <option>Abril</option><option>Maio</option><option>Junho</option>
+                    <option>Julho</option><option>Agosto</option><option>Setembro</option>
+                    <option>Outubro</option><option>Novembro</option><option>Dezembro</option>
+                  </select>
+                  <small class="field-error"></small>
+                </label>
+
+                <label class="field">
+                  <span>Qual idioma você utilizou?</span>
+                  <select name="monthly_language" data-project-required>
+                    <option value="">Selecione</option>
+                    <option>Português</option><option>Inglês</option><option>Francês</option><option>Espanhol</option>
+                  </select>
+                  <small class="field-error"></small>
+                </label>
+              </div>
+
+              <fieldset class="question">
+                <legend>Você usaria o site novamente para consultar uma data ou campanha?</legend>
+                <div class="choice-pills">
+                  <label><input type="radio" name="monthly_return" value="Sim" data-project-required><span>Sim</span></label>
+                  <label><input type="radio" name="monthly_return" value="Talvez"><span>Talvez</span></label>
+                  <label><input type="radio" name="monthly_return" value="Não"><span>Não</span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+            </div>
+
+            <div data-project-panel="chromatic" hidden>
+              <fieldset class="question">
+                <legend>O objetivo do jogo ficou claro?</legend>
+                <div class="choice-pills">
+                  <label><input type="radio" name="void_objective" value="Sim" data-project-required><span>Sim</span></label>
+                  <label><input type="radio" name="void_objective" value="Parcialmente"><span>Parcialmente</span></label>
+                  <label><input type="radio" name="void_objective" value="Não"><span>Não</span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+
+              <fieldset class="question rating-question">
+                <legend>Como você avalia a resposta dos controles?</legend>
+                <div class="rating-row" role="radiogroup" aria-label="Resposta dos controles do jogo">
+                  <label><input type="radio" name="void_controls" value="1" data-project-required><span>1<small>Ruim</small></span></label>
+                  <label><input type="radio" name="void_controls" value="2"><span>2<small>Fraca</small></span></label>
+                  <label><input type="radio" name="void_controls" value="3"><span>3<small>Regular</small></span></label>
+                  <label><input type="radio" name="void_controls" value="4"><span>4<small>Boa</small></span></label>
+                  <label><input type="radio" name="void_controls" value="5"><span>5<small>Ótima</small></span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+
+              <fieldset class="question">
+                <legend>Como ficou o nível de dificuldade?</legend>
+                <div class="choice-pills choice-pills--wrap">
+                  <label><input type="radio" name="void_difficulty" value="Muito fácil" data-project-required><span>Muito fácil</span></label>
+                  <label><input type="radio" name="void_difficulty" value="Equilibrado"><span>Equilibrado</span></label>
+                  <label><input type="radio" name="void_difficulty" value="Muito difícil"><span>Muito difícil</span></label>
+                  <label><input type="radio" name="void_difficulty" value="Confuso"><span>Confuso</span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+
+              <fieldset class="question">
+                <legend>Qual elemento mais chamou sua atenção?</legend>
+                <div class="option-cards option-cards--three">
+                  <label><input type="radio" name="void_favorite_element" value="Movimentação" data-project-required><span><b>↗</b>Movimentação</span></label>
+                  <label><input type="radio" name="void_favorite_element" value="Combate"><span><b>✦</b>Combate</span></label>
+                  <label><input type="radio" name="void_favorite_element" value="Cores e visual"><span><b>◉</b>Cores e visual</span></label>
+                  <label><input type="radio" name="void_favorite_element" value="Habilidades"><span><b>⌁</b>Habilidades</span></label>
+                  <label><input type="radio" name="void_favorite_element" value="Desafio"><span><b>△</b>Desafio</span></label>
+                  <label><input type="radio" name="void_favorite_element" value="Trilha e efeitos"><span><b>♫</b>Trilha e efeitos</span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+
+              <fieldset class="question">
+                <legend>Você jogaria novamente?</legend>
+                <div class="choice-pills">
+                  <label><input type="radio" name="void_play_again" value="Sim" data-project-required><span>Sim</span></label>
+                  <label><input type="radio" name="void_play_again" value="Talvez"><span>Talvez</span></label>
+                  <label><input type="radio" name="void_play_again" value="Não"><span>Não</span></label>
+                </div>
+                <small class="group-error"></small>
+              </fieldset>
+            </div>
+          </section>
+
+          <section class="form-step" data-step="4" hidden>
+            <div class="step-heading">
+              <p class="eyebrow">Conte do seu jeito</p>
+              <h2>O que devemos manter ou melhorar?</h2>
+              <p>Agora você pode explicar livremente o que percebeu durante o uso.</p>
+            </div>
+
+            <label class="field field--textarea">
+              <span>O que você mais gostou?</span>
+              <textarea name="positive_feedback" placeholder="Conte qual detalhe funcionou melhor para você..." required minlength="5" maxlength="700"></textarea>
+              <small><span class="field-error"></span><span class="character-count">0 / 700</span></small>
+            </label>
+
+            <label class="field field--textarea">
+              <span>O que poderia ser melhorado?</span>
+              <textarea name="improvement_feedback" placeholder="Pode falar sobre conteúdo, visual, navegação, controles ou qualquer outro ponto..." required minlength="5" maxlength="700"></textarea>
+              <small><span class="field-error"></span><span class="character-count">0 / 700</span></small>
+            </label>
+
+            <fieldset class="question">
+              <legend>Você encontrou algum erro ou travamento?</legend>
+              <div class="choice-pills">
+                <label><input type="radio" name="found_bug" value="Sim" required><span>Sim</span></label>
+                <label><input type="radio" name="found_bug" value="Não"><span>Não</span></label>
+                <label><input type="radio" name="found_bug" value="Não tenho certeza"><span>Não tenho certeza</span></label>
+              </div>
+              <small class="group-error"></small>
+            </fieldset>
+
+            <label class="field field--textarea conditional-field" data-show-when-bug hidden>
+              <span>O que aconteceu?</span>
+              <textarea name="bug_details" placeholder="Diga onde aconteceu, o que você fez e qual dispositivo estava usando..." maxlength="700"></textarea>
+              <small><span class="field-error"></span><span class="character-count">0 / 700</span></small>
+            </label>
+
+            <label class="field field--textarea">
+              <span>Quer deixar outra sugestão? <em>Opcional</em></span>
+              <textarea name="additional_suggestion" placeholder="Ideias novas também são bem-vindas." maxlength="700"></textarea>
+              <small><span class="field-error"></span><span class="character-count">0 / 700</span></small>
+            </label>
+          </section>
+
+          <section class="form-step" data-step="5" hidden>
+            <div class="step-heading">
+              <p class="eyebrow">Última etapa</p>
+              <h2>Confira antes de enviar</h2>
+              <p>Você ainda pode voltar e alterar qualquer resposta.</p>
+            </div>
+
+            <div class="review-card" id="review-card" aria-live="polite"></div>
+
+            <label class="consent">
+              <input type="checkbox" name="consent" value="Aceito" required>
+              <span>
+                Autorizo o uso das respostas, do meu nome, e-mail e localização exclusivamente para análise e melhoria dos projetos. Esses dados não devem ser publicados nem compartilhados com terceiros.
+              </span>
+            </label>
+            <small class="consent-error"></small>
+          </section>
+
+          <div class="form-actions">
+            <button class="button button--ghost" type="button" id="previous-button" hidden>Voltar</button>
+            <button class="button button--primary" type="button" id="next-button">Continuar <span aria-hidden="true">→</span></button>
+            <button class="button button--primary" type="submit" id="submit-button" hidden>
+              <span class="button__idle">Enviar feedback <span aria-hidden="true">↗</span></span>
+              <span class="button__loading">Enviando…</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="screen screen--success" id="success-screen" aria-labelledby="success-title" hidden>
+        <div class="success-symbol" aria-hidden="true"><span>✓</span></div>
+        <p class="eyebrow">Feedback enviado</p>
+        <h2 id="success-title">Obrigado por participar.</h2>
+        <p>Sua resposta foi registrada e ajudará a orientar as próximas melhorias.</p>
+        <button class="button button--primary" type="button" data-reset-form>Avaliar outro projeto</button>
+        <div class="confetti" id="confetti" aria-hidden="true"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Desenvolvido por Tamires Alves e Lucas Cruz · Projeto TCC 2026</p>
+      <p class="privacy-note">As respostas são utilizadas somente para avaliação dos projetos.</p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
